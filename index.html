@@ -3,78 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>פצצב המשחק</title>
-    <style>
-      #task-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-      }
-
-      #task-content {
-        background: white;
-        padding: 30px;
-        border-radius: 20px;
-        max-width: 500px;
-        text-align: center;
-      }
-
-      #restart-button {
-        display: none;
-        background: linear-gradient(45deg, #4caf50, #2e7d32);
-      }
-
-      .task-button {
-        background: linear-gradient(#4caf50, #388e3c);
-        border: 5px solid #2e7d32;
-        left: 220px;
-        width: 200px;
-      }
-    </style>
-    <link rel="stylesheet" href="./index.css">
+    <title>משחק פצצב</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div id="game-container">
-      <h1>🐢 פצצב המשחק 💣</h1>
+      <!-- Setup Section -->
       <div id="setup-container">
-        <input
-          type="text"
-          id="group-input"
-          placeholder="הכנס שם קבוצה"
-          maxlength="20"
-        />
+        <h1>🐢 פצצב המשחק 💣</h1>
+        <input type="text" id="group-input" placeholder="שם הקבוצה" />
         <button onclick="addGroup()">הוסף קבוצה</button>
+        <button id="start-button" onclick="startGame()">התחל משחק</button>
       </div>
-      <div id="groups-container"></div>
-      <button onclick="startGame()" id="start-button">התחל משחק</button>
-      <button onclick="restartGame()" id="restart-button">התחל מחדש</button>
-      <p id="turn-indicator">בשביל להתחיל צריך לפחות 2 שחקנים</p>
-      <button onclick="showTaskModal()"> משימה חלופית</button>
 
-      <div class="scene" id="game-scene">
-        <div class="ground"></div>
-        <div class="turtle">
-          <div class="shell"></div>
-          <div class="button" onclick="handleTurtleClick()"></div>
-          <div class="head">
-            <div class="eye"></div>
+      <!-- Group Names List -->
+      <div id="groups-container"></div>
+      <div id="win-indicator" style="display: none;"></div>
+
+      <!-- Restart Button -->
+      <button id="restart-button" onclick="restartGame()">התחל מחדש</button>
+
+      <div id="game" style="display: none">
+        <!-- Turn Indicator -->
+        <div id="turn-indicator" >התור של</div>
+
+        <button onclick="showTaskModal()" id="task-click">משימה חלופית</button>
+
+        <div style="display: flex; flex-direction: row">
+          <!-- Wheel of Fortune Section -->
+          <div id="wheel-section" style="display: none">
+            <button onclick="spinWheel()">סובב את גלגל המזל</button>
+            <div id="wheel-container">
+              <canvas id="wheel"></canvas>
+              <div id="wheel-overlay" class="wheel-overlay">
+                <div id="wheel-result"></div>
+              </div>
+            </div>
           </div>
-          <div class="leg front-leg"></div>
-          <div class="leg back-leg"></div>
+
+          <!-- Game Section -->
+          <div class="scene" id="game-scene" style="width: 90%">
+            <div class="ground"></div>
+            <div class="turtle">
+              <div class="shell"></div>
+              <div class="button" onclick="handleTurtleClick()"></div>
+              <div class="head">
+                <div class="eye"></div>
+              </div>
+              <div class="leg front-leg"></div>
+              <div class="leg back-leg"></div>
+            </div>
+            <div class="explosion">
+              <div class="explosion-circle"></div>
+            </div>
+            <div class="speech-bubble">שלום! 👋</div>
+          </div>
         </div>
-        <div class="explosion">
-          <div class="explosion-circle"></div>
-        </div>
-        <div class="speech-bubble">שלום! 👋</div>
       </div>
     </div>
+
+    <!-- Confetti Canvas -->
+    <canvas
+      id="confetti"
+      style="position: absolute; top: 0; left: 0; pointer-events: none"
+    ></canvas>
+
+    <!-- Speech Bubble for Turtle -->
+    <div class="speech-bubble">שלום!</div>
 
     <div id="task-modal">
       <div id="task-content">
@@ -85,7 +80,6 @@
       </div>
     </div>
 
-    <canvas id="confetti"></canvas>
-    <script src="./index.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

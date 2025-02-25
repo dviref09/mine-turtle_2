@@ -231,10 +231,10 @@ function updateTurnIndicator() {
       "turn-indicator"
     ).textContent = `התור של ${groups[currentTurn].name}`;
 
-    if (Math.random() < 0.3) {
+    if (Math.random() > 0.9) {
     wheel.style.display = "block";
     }
-    if (Math.random() < 0.1) {
+    if (Math.random() < 0.05) {
         document.getElementById("task-click").style.display = "none";
     }
   }
@@ -247,7 +247,7 @@ function applyWheelResult(result) {
       break;
     case 1: // Explode
       groups[currentTurn].eliminated = true;
-      explosionChance = 0.1;
+      explosionChance = 0.05;
       sayHello();
       setTimeout(() => {
         explodeTurtle();
@@ -292,13 +292,13 @@ function handleTurtleClick() {
 
   if (Math.random() < explosionChance) {
     groups[currentTurn].eliminated = true;
-    explosionChance = 0.1;
+    explosionChance = 0.05;
     sayHello();
     setTimeout(() => {
       explodeTurtle();
     }, 1000);
   } else {
-    explosionChance += 0.03;
+    explosionChance += 0.04;
     if (currentWheel === null) nextTurn();
     if (currentWheel == 0 || currentWheel == 2) {currentWheel = null;}
   }

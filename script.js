@@ -15,7 +15,6 @@ const tasks = [
     "עמוד על רגל אחת ותכאו כפיים מאחורי הגב למשך 30 שניות",
     "תאר משהו שאחראים יגידו לך בלי לומר מהו הוא עד שינחשו אותו",
     "תמצא 2 חפצים שמתחילים באות שנותנים לך האחראים",
-    "תבחר חבר שישאל אותך שאלות כאילו שאתה סלבריטי והוא ישאל שאלות כאילו שהוא לא שמע את התשובות שלך",
     "תכריז בקול חדשות דרמטי על מה שקורה בתחנת הבאולינג",
     "תתרגם משפט שאנחנו נותנים לך לשפה חייזרית שאתה ממציא",
     "אנחנו נענה תשובות ואז אתה תשאל את השאלה שענינו עליה. לדוגמא אנחנו נגיד אדום ואז אתה תגיד באיזה צבע תפוח",
@@ -247,7 +246,7 @@ function applyWheelResult(result) {
       break;
     case 1: // Explode
       groups[currentTurn].eliminated = true;
-      explosionChance = 0.2;
+      explosionChance = 0.5;
       sayHello();
       setTimeout(() => {
         explodeTurtle();
@@ -292,7 +291,7 @@ function handleTurtleClick() {
 
   if (Math.random() < explosionChance) {
     groups[currentTurn].eliminated = true;
-    explosionChance = 0.2;
+    explosionChance = 0.5;
     sayHello();
     setTimeout(() => {
       explodeTurtle();

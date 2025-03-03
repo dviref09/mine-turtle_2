@@ -8,7 +8,6 @@ const helloSound = new Audio("./sound/hello.mp3");
 const explosionSound = new Audio("./sound/explosion.mp3");
 
 const tasks = [
-    "נסו לנהל שיחה שלמה בחרוזים.",
     "עשו תחרות של מבטים – הראשון שממצמץ מפסיד!",
     "עמדו על רגל אחת ונסו לספר בדיחה בלי ליפול.",
     "תעשה פנטומימה למשהו שהאחראים יגידו לך",
@@ -16,8 +15,6 @@ const tasks = [
     "תאר משהו שאחראים יגידו לך בלי לומר מהו הוא עד שינחשו אותו",
     "תמצא 2 חפצים שמתחילים באות שנותנים לך האחראים",
     "תכריז בקול חדשות דרמטי על מה שקורה בתחנת הבאולינג",
-    "תתרגם משפט שאנחנו נותנים לך לשפה חייזרית שאתה ממציא",
-    "אנחנו נענה תשובות ואז אתה תשאל את השאלה שענינו עליה. לדוגמא אנחנו נגיד אדום ואז אתה תגיד באיזה צבע תפוח",
     "תנסה לצייר ליצן מבלי להוריד את הטוש מהלוח",
     "תעשה קול של חפץ כלשהו (לדוגמא רעש של אופנים) וכולנו מצטרך לנחש מה זה"
 ];
@@ -246,7 +243,7 @@ function applyWheelResult(result) {
       break;
     case 1: // Explode
       groups[currentTurn].eliminated = true;
-      explosionChance = 0.5;
+      explosionChance = 0.4;
       sayHello();
       setTimeout(() => {
         explodeTurtle();
@@ -291,7 +288,7 @@ function handleTurtleClick() {
 
   if (Math.random() < explosionChance) {
     groups[currentTurn].eliminated = true;
-    explosionChance = 0.5;
+    explosionChance = 0.4;
     sayHello();
     setTimeout(() => {
       explodeTurtle();

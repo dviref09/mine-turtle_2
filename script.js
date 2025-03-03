@@ -8,18 +8,13 @@ const helloSound = new Audio("./sound/hello.mp3");
 const explosionSound = new Audio("./sound/explosion.mp3");
 
 const tasks = [
-    "עשו חיקוי של מורה מפורסם מהבית ספר שלכם.",
-    "צרחו את השם שלכם כאילו אתם בסרט אימה.",
     "נסו לנהל שיחה שלמה בחרוזים.",
-    "רקדו כאילו אתם במשחק Just Dance (המציאו את הריקוד).",
-    "שחקו סצנה דרמטית שבה מישהו מגלה שהוא חייזר.",
-    "המציאו פרסומת למוצר מגוחך (כמו משקפי שמש לחתולים).",
     "עשו תחרות של מבטים – הראשון שממצמץ מפסיד!",
-    "עשו שיחת טלפון דמיונית שבה אתם מסבירים למישהו איך להשתמש בכפית.",
     "עמדו על רגל אחת ונסו לספר בדיחה בלי ליפול.",
-    "שכנעו את הקבוצה שמלפפון הוא הפרי הכי טעים בעולם.",
-    "הציגו סצנה מסרט מפורסם, אבל תחליפו את כל המילים במילה 'בננה'.",
-    "שחקו סצנה שבה אתם מנסים לברוח מזומבי... אבל כולם נעים בסלואו-מושן."
+    "תעשה פנטומימה למשהו שהאחראים יגידו לך",
+    "עמוד על רגל אחת למשך 30 שניות",
+    "תאר משהו שאחראים יגידו לך בלי לומר מהו הוא עד שינחשו אותו",
+    "תמצא 2 חפצים שמתחילים באות שנותנים לך האחראים"
 ];
 
 let currentWheel = null;
@@ -30,12 +25,11 @@ const wheelDict = [
   { id: 2, text: "לקבוצה אחריכם יש 2 תורות" },
   { id: 3, text: "ניצחתם!" },
   { id: 4, text: "אתם לא יכולים לעשות משימה" },
-  { id: 5, text: "הקבוצה הבא לא יכולה לעשות משימה" },
-  { id: 6, text: "הקבוצה שלכם תקבל פרס" },
+  { id: 5, text: "הקבוצה הבא לא יכולה לעשות משימה" }
 ];
 
 // Wheel of Fortune Rewards and Punishments
-const wheelItems = [0, 0, 0, 1, 2, 2, 2, 3, 4, 4, 4, 5, 5, 5, 6];
+const wheelItems = [0, 0, 0, 1, 2, 2, 2, 3, 4, 4, 4, 5, 5, 5];
 
 // Wheel setup
 const wheelCanvas = document.getElementById("wheel");
@@ -231,7 +225,7 @@ function updateTurnIndicator() {
       "turn-indicator"
     ).textContent = `התור של ${groups[currentTurn].name}`;
 
-    if (Math.random() > 0.9) {
+    if (Math.random() < 0.5) {
     wheel.style.display = "block";
     }
     if (Math.random() < 0.05) {
@@ -247,7 +241,7 @@ function applyWheelResult(result) {
       break;
     case 1: // Explode
       groups[currentTurn].eliminated = true;
-      explosionChance = 0.05;
+      explosionChance = 0.2;
       sayHello();
       setTimeout(() => {
         explodeTurtle();
@@ -292,13 +286,13 @@ function handleTurtleClick() {
 
   if (Math.random() < explosionChance) {
     groups[currentTurn].eliminated = true;
-    explosionChance = 0.05;
+    explosionChance = 0.2;
     sayHello();
     setTimeout(() => {
       explodeTurtle();
     }, 1000);
   } else {
-    explosionChance += 0.04;
+    explosionChance += 0.07;
     if (currentWheel === null) nextTurn();
     if (currentWheel == 0 || currentWheel == 2) {currentWheel = null;}
   }
